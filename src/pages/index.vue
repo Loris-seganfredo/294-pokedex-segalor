@@ -15,5 +15,12 @@
 </template>
 
 <script setup>
-// Vos scripts ou imports ici
+const pokemons = ref([])
+
+onMounted(async () => {
+  const response = await fetch('http://localhost:3535/pokemons')
+  const data = await response.json()
+
+  pokemons.value = data
+})
 </script>
