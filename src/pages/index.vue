@@ -9,12 +9,41 @@
     -->
     <h1 class="text-h3 text-center my-6">
       Pokédex
+
     </h1>
+
+    <v-row>
+      <v-col
+        v-for="pokemon in pokemons"
+        :key="pokemon.id"
+        cols="12"
+        sm="6"
+        md="4"
+        lg="3"
+      >
+        <v-card>
+          <v-img
+            :src="getImageUrl(pokemon.img)"
+            height="200"
+            cover
+          />
+
+          <v-card-title>
+            {{ pokemon.name }}
+          </v-card-title>
+
+          <v-card-subtitle>
+            Niveau {{ pokemon.level }}
+          </v-card-subtitle>
+        </v-card>
+      </v-col>
+    </v-row>
     <!-- TODO: Afficher les Pokémon ici -->
   </v-container>
 </template>
 
 <script setup>
+import { getImageUrl } from '@/utils/imageUrl'
 const pokemons = ref([])
 
 onMounted(async () => {
