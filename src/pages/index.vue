@@ -21,21 +21,7 @@
         md="4"
         lg="3"
       >
-        <v-card>
-          <v-img
-            :src="getImageUrl(pokemon.img)"
-            height="200"
-            cover
-          />
-
-          <v-card-title>
-            {{ pokemon.name }}
-          </v-card-title>
-
-          <v-card-subtitle>
-            Niveau {{ pokemon.level }}
-          </v-card-subtitle>
-        </v-card>
+        <PokemonCard :pokemon="pokemon" />
       </v-col>
     </v-row>
     <!-- TODO: Afficher les Pokémon ici -->
@@ -43,7 +29,8 @@
 </template>
 
 <script setup>
-import { getImageUrl } from '@/utils/imageUrl'
+import PokemonCard from '@/components/PokemonCard.vue'
+
 const pokemons = ref([])
 
 onMounted(async () => {
