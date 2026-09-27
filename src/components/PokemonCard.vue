@@ -1,16 +1,26 @@
 <script setup>
 import { getImageUrl } from '@/utils/imageUrl'
+import { useRouter } from 'vue-router'
 
-defineProps({
+const router = useRouter()
+
+const props = defineProps({
   pokemon: {
     type: Object,
     required: true,
   },
 })
+
+function ouvrirPokemon() {
+  router.push(`/pokemon/${props.pokemon.id}`)
+}
 </script>
 
 <template>
-  <v-card hover>
+  <v-card
+    hover
+    @click="ouvrirPokemon"
+  >
     <v-img
       :src="getImageUrl(pokemon.img)"
       :alt="pokemon.name"
@@ -27,7 +37,3 @@ defineProps({
     </v-card-subtitle>
   </v-card>
 </template>
-
-<style scoped>
-
-</style>
