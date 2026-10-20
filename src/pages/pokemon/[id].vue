@@ -28,7 +28,9 @@
 
     <!-- Si les données sont chargées mais que l'ID n'existe pas -->
     <v-alert
-      v-else-if="pokemons.length"
+
+      v-else-if="pokemonStore.pokemons.length"
+
       type="error"
     >
       Pokémon introuvable.
@@ -41,16 +43,14 @@
 import { getImageUrl } from '@/utils/imageUrl'
 import { useRoute } from 'vue-router'
 
-const route = useRoute()
+import { computed } from 'vue'
+import { usePokemonStore } from '@/stores/pokemonStore'
 
-const pokemons = ref([])
+
+const route = useRoute()
+const pokemonStore = usePokemonStore()
 
 const pokemon = computed(() => {
-  return pokemons.value.find(p => p.id === route.params.id)
-})
-
-onMounted(async () => {
-  const response = await fetch('http://localhost:3535/pokemons')
-  pokemons.value = await response.json()
+  return pokemonStore.getPokemonById(route.params.id)
 })
 </script>
